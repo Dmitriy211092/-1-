@@ -1,1 +1,52 @@
-
+using System;
+namespace InheritanceDemo
+{
+    public class Animal
+    {
+        public string Name { get; set; }
+        public Animal(string name)
+        {
+            Name = name;
+        }
+        public void Eat()
+        {
+            Console.WriteLine($"{Name} );
+        }
+        public virtual void MakeSound()
+        {
+            Console.WriteLine($"{Name};
+        }
+    }
+    public class Dog : Animal
+    {
+        public Dog(string name) : base(name) { }
+        public override void MakeSound()
+        {
+            Console.WriteLine($"{Name};
+        }
+        public new void Eat()
+        {
+            Console.WriteLine($"{Name};
+        }
+    }
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            Console.WriteLine;
+            Animal genericAnimal = new Animal;
+            genericAnimal.Eat();
+            genericAnimal.MakeSound();
+            Console.WriteLine;
+            Dog myDog = new Dog;
+            myDog.Eat(); // Derived
+            myDog.MakeSound(); //
+            Console.WriteLine;
+            Animal polymorphDog = new Dog;
+            polymorphDog.Eat(); //
+            polymorphDog.MakeSound(); // 
+            Console.WriteLine;
+                    ((Animal)myDog).Eat(); 
+        }
+    }
+}
