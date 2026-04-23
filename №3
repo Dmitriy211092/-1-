@@ -1,0 +1,42 @@
+CREATE DATABASE IF NOT EXISTS TourismDB;
+USE TourismDB;
+(clients)
+CREATE TABLE clients (
+    client_id INT AUTO_INCREMENT PRIMARY KEY,
+    full_name VARCHAR(100) NOT NULL,
+    passport_data VARCHAR(50) NOT NULL UNIQUE,
+    phone VARCHAR(20)
+);
+(services)
+CREATE TABLE services (
+    service_id INT AUTO_INCREMENT PRIMARY KEY,
+    service_name VARCHAR(100) NOT NULL,
+    description TEXT,
+    base_price DECIMAL(10, 2) NOT NULL
+);
+(hotels)
+CREATE TABLE hotels (
+    hotel_id INT AUTO_INCREMENT PRIMARY KEY,
+    hotel_name VARCHAR(100) NOT NULL,
+    stars INT CHECK (stars BETWEEN 1 AND 5),
+    country VARCHAR(50) NOT NULL
+);
+ (bookings)
+CREATE TABLE bookings (
+    booking_id INT AUTO_INCREMENT PRIMARY KEY,
+    client_id INT NOT NULL,
+    service_id INT NOT NULL,
+    hotel_id INT NOT NULL,
+    booking_date DATE NOT NULL,
+    start_date DATE NOT NULL,
+    end_date DATE NOT NULL,
+    total_price DECIMAL(10, 2) NOT NULL,
+    
+  
+    CONSTRAINT fk_bookings_client FOREIGN KEY (client_id) 
+        REFERENCES clients(client_id) ON DELETE CASCADE,
+    CONSTRAINT fk_bookings_service FOREIGN KEY (service_id) 
+        REFERENCES services(service_id),
+    CONSTRAINT fk_bookings_hotel FOREIGN KEY (hotel_id) 
+        REFERENCES hotels(hotel_id)
+);
