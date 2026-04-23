@@ -1,0 +1,24 @@
+def sum_negative_between_extremes(arr):
+    if len(arr) < 2:                
+        return 0
+    max_val = max(arr)
+    min_val = min(arr)
+    idx_max = arr.index(max_val)
+    idx_min = arr.index(min_val)
+    start = min(idx_max, idx_min)
+    end = max(idx_max, idx_min)
+    negative_sum = 0
+    # Range от start+1 до end, 
+    for i in range(start + 1, end):
+        if arr[i] < 0:
+            negative_sum += arr[i]
+            
+    return negative_sum
+
+# Пример использования:
+array = [10, -5, 3, -2, 7, -8, 1, -1, 5]
+# min: -8 (index 5), max: 10 (index 0). Между ними: -5, 3, -2, 7.
+# Отрицательные: -5, -2. Сумма: -7
+result = sum_negative_between_extremes(array)
+print(f"Массив: {array}")
+print(f"Сумма отрицательных элементов между min и max: {result}")
